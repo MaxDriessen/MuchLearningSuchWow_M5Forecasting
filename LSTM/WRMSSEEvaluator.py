@@ -1,3 +1,5 @@
+# Source: https://www.kaggle.com/c/m5-forecasting-accuracy/discussion/133834
+
 import numpy as np
 import pandas as pd
 

@@ -1,0 +1,79 @@
+[
+  {
+    "type": "shift",
+    "params": {
+      "shifts": [3, 7, 28]
+    }
+  },
+  {
+    "type": "downcast"
+  },
+  {
+    "type": "roll",
+    "params": {
+      "type": "mean",
+      "window_sizes": [3, 7],
+      "shift": 3
+    }
+  },
+  {
+    "type": "roll",
+    "params": {
+      "type": "mean",
+      "window_sizes": [7, 28],
+      "shift": 7
+    }
+  },
+  {
+    "type": "roll",
+    "params": {
+      "type": "mean",
+      "window_sizes": [7, 28],
+      "shift": 28
+    }
+  },
+  {
+    "type": "downcast"
+  },
+  {
+    "type": "shift_change",
+    "params": {
+      "column": "sell_price",
+      "shifts": [1]
+    }
+  },
+  {
+    "type": "roll",
+    "params": {
+      "column": "sell_price",
+      "window_sizes": [7, 30],
+      "type": "std",
+      "shift": 0
+    }
+  },
+  {
+    "type": "time_features",
+    "params": {
+      "time_attrs": [
+                "day",
+                "month",
+                "weekofyear",
+                "weekday"
+            ],
+      "cyclical": true
+    }
+  },
+  {
+    "type": "time_features",
+    "params": {
+      "time_attrs": [
+                "year",
+                "quarter"
+            ],
+      "cyclical": false
+    }
+  },
+  {
+    "type": "downcast"
+  }
+]

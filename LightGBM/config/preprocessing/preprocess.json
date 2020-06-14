@@ -1,0 +1,130 @@
+[
+  {
+    "type": "extend_data",
+    "params": {
+      "n": 56
+    }
+  },
+  {
+    "type": "to_long"
+  },
+  {
+    "type": "merge_data"
+  },
+  {
+    "type": "downcast"
+  },
+  {
+    "type": "shift",
+    "params": {
+      "shifts": [28, 29, 30]
+    }
+  },
+  {
+    "type": "downcast"
+  },
+  {
+    "type": "roll",
+    "params": {
+      "type": "std",
+      "window_sizes": [7, 30, 60, 90, 180]
+    }
+  },
+  {
+    "type": "roll",
+    "params": {
+      "type": "mean",
+      "window_sizes": [7, 30, 60, 90, 180]
+    }
+  },
+  {
+    "type": "roll",
+    "params": {
+      "type": "min",
+      "window_sizes": [7, 30, 60]
+    }
+  },
+  {
+    "type": "roll",
+    "params": {
+      "type": "max",
+      "window_sizes": [7, 30, 60]
+    }
+  },
+  {
+    "type": "downcast"
+  },
+  {
+    "type": "roll",
+    "params": {
+      "type": "skew",
+      "window_sizes": [30],
+      "shift": 28
+    }
+  },
+  {
+    "type": "roll",
+    "params": {
+      "type": "kurt",
+      "window_sizes": [30]
+    }
+  },
+  {
+    "type": "downcast"
+  },
+  {
+    "type": "shift_change",
+    "params": {
+      "column": "sell_price",
+      "shifts": [1]
+    }
+  },
+  {
+    "type": "rolling_change",
+    "params": {
+      "column": "sell_price",
+      "window_sizes": [365],
+      "type": "max"
+    }
+  },
+  {
+    "type": "roll",
+    "params": {
+      "column": "sell_price",
+      "window_sizes": [7, 30],
+      "type": "std",
+      "shift": 0
+    }
+  },
+  {
+    "type": "downcast"
+  },
+  {
+    "type": "time_features",
+    "params": {
+      "time_attrs": [
+                "year",
+                "day"
+            ],
+      "cyclical": false
+    }
+  },
+  {
+    "type": "time_features",
+    "params": {
+      "time_attrs": [
+                "quarter",
+                "month",
+                "week",
+                "dayofweek"
+            ],
+      "cyclical": true
+    }
+  },
+  {
+    "type": "weekend_feature"
+  },
+  {
+    "type": "downcast"
+  }
+]

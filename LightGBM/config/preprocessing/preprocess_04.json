@@ -1,0 +1,105 @@
+[
+  {
+    "type": "extend_data",
+    "params": {
+      "n": 28
+    }
+  },
+  {
+    "type": "categorical_to_int",
+    "params": {
+      "categorical_columns_calendar": ["event_name_1", "event_type_1", "event_name_2", "event_type_2", "weekday"],
+      "categorical_columns_prices": ["store_id", "item_id"],
+      "categorical_columns_sales": ["item_id", "dept_id","store_id", "cat_id", "state_id"]
+    }
+  },
+  {
+    "type": "to_long"
+  },
+  {
+    "type": "merge_data"
+  },
+  {
+    "type": "downcast"
+  },
+  {
+    "type": "shift",
+    "params": {
+      "shifts": [3, 7, 28]
+    }
+  },
+  {
+    "type": "downcast"
+  },
+  {
+    "type": "roll",
+    "params": {
+      "type": "mean",
+      "window_sizes": [3, 7],
+      "shift": 3
+    }
+  },
+  {
+    "type": "roll",
+    "params": {
+      "type": "mean",
+      "window_sizes": [7, 28],
+      "shift": 7
+    }
+  },
+  {
+    "type": "roll",
+    "params": {
+      "type": "mean",
+      "window_sizes": [7, 28],
+      "shift": 28
+    }
+  },
+  {
+    "type": "downcast"
+  },
+  {
+    "type": "shift_change",
+    "params": {
+      "column": "sell_price",
+      "shifts": [1]
+    }
+  },
+  {
+    "type": "roll",
+    "params": {
+      "column": "sell_price",
+      "window_sizes": [7, 30],
+      "type": "std",
+      "shift": 0
+    }
+  },
+  {
+    "type": "time_features",
+    "params": {
+      "time_attrs": [
+                "day",
+                "month",
+                "weekofyear",
+                "weekday"
+            ],
+      "cyclical": true
+    }
+  },
+  {
+    "type": "time_features",
+    "params": {
+      "time_attrs": [
+                "year",
+                "quarter"
+            ],
+      "cyclical": false
+    }
+  },
+  {
+    "type": "remove_nan_rows"
+  },
+  {
+    "type": "downcast"
+  }
+]
